@@ -1,7 +1,7 @@
 <template>
     <header class="main-header">
         <div class="header-left">
-            <a href="" class="menu">
+            <a href="" class="menu header-link">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="52px" height="52px" viewBox="0 0 13.971 13.969" enable-background="new 0 0 13.971 13.969" xml:space="preserve">
                     <path fill="none" stroke="#FFFFFF" stroke-width="1.0909" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
@@ -16,11 +16,44 @@
         </div>
         <div class="header-middle">Points</div>
         <div class="header-right">
-            <div class="search-expanded">
-                <input type="text" class="search-input"/>
-                <div class="search-results"></div>
+            <div class="search-expanded" v-on-clickaway="away">
+                <input type="text" @keyup="showSearchResults" class="search-input" id="search-input" placeholder="Search"/>
+                <div class="search-results" id="search-results">
+                    <div class="results-header">
+                        <a href="" class="results-filter">All</a>
+                        <a href="" class="results-filter">Roster</a>
+                        <a href="" class="results-filter">Student</a>
+                        <a href="" class="results-filter">Reports</a>
+                    </div>
+                    <div class="results-body">
+                        <a href="" class="search-result">
+                            <span class="search-category">Student</span>
+                            <span class="search-name">Jane Doe</span>
+                        </a>
+                        <a href="" class="search-result">
+                            <span class="search-category">Student</span>
+                            <span class="search-name">John Doe</span>
+                        </a>
+                        <a href="" class="search-result">
+                            <span class="search-category">Roster</span>
+                            <span class="search-name">3rd Grade</span>  
+                        </a>
+                        <a href="" class="search-result">
+                            <span class="search-category">Roster</span>
+                            <span class="search-name">Kindergarten</span> 
+                        </a>
+                        <a href="" class="search-result">
+                            <span class="search-category">Report</span>
+                            <span class="search-name">September Points</span>   
+                        </a>
+                        <a href="" class="search-result">
+                            <span class="search-category">Report</span>
+                            <span class="search-name">October Points</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <a href="" class="search-icon">
+            <a href="" class="search-icon header-link" @click.prevent="toggleSearch">
                 <svg version="1.1" id="search-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-255 347 100 100" style="enable-background:new -255 347 100 100;" xml:space="preserve">
                     <g>
                         <path class="st0" d="M-242.5,385.2c0-12.9,11.2-23.5,24.9-23.5c13.8,0,25,10.6,25,23.5c0,13-11.2,23.5-25,23.5
@@ -30,7 +63,7 @@
                     </g>
                 </svg>
             </a>
-            <a href="" class="chat-icon">
+            <a href="" class="chat-icon header-link">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="32px" height="32px" viewBox="0 0 15.82 15.82" enable-background="new 0 0 15.82 15.82" xml:space="preserve">
                     <g>
@@ -43,15 +76,30 @@
                     </g>
                 </svg>
             </a>
-            <a href="" class="user-icon">
-                <span>HM</span>
+            <a href="" class="user-icon header-link">
+                <span class="user-circle">
+                    <span class="user-initials">HM</span>
+                </span>
             </a>
         </div>
     </header>
 </template>
 <script>
-    export default {
+    export default { 
         name: "AppHeader",
+        mixins: [ clickaway ],
+        methods: {
+            toggleSearch(e) {
+                let searchInput = document.getElementById("search-input");
+                searchInput.classList.toggle("search-input-active");
+            },
+            showSearchResults(e) {
+                let searchResults = document.getElementById("search-results");
+                if(!searchResults.classList.contains('search-results-active')) {
+                    searchResults.classList.add("search-results-active");
+                }
+            }
+        }
     }
 </script>
 <style lang="scss">
@@ -60,34 +108,28 @@
         background-color: #3B6FC8;
         position: relative;
     }
-
     .header-left,
     .header-right {
         position: absolute;
         top: 12px;
     }
-
     .header-left {
         left: 12px;
     }
-
     .header-middle {
         font-size: 24px;
         color: #fff;
         position: relative;
         top: 22px;
     }
-
     .header-right {
         right: 12px;
     }
-
     .menu {
         text-decoration: none;
         color: #fff;
         height: 52px;
         display: inline-block;
-
         span {
             font-size: 24px; 
             vertical-align: top;
@@ -95,44 +137,125 @@
             top: 10px;
         }
     }
-
     .search-expanded {
         display: inline-block;
-
+        position: relative;
+        bottom: 10px;
         .search-input {
             border: none;
+            /* border-bottom: 1px solid black; */
+            height: 27px;
+            font-size: 18px;
+            width: 0;
+            opacity: 0;
+            transition: width .35s, opacity .35s;
+            /* border-radius: 13px; */
+            padding: 5px 10px;
+            /* display: none; */
+            &:active,
+            &:focus {
+                outline: none;
+            }
+            
+        }
+        .search-input-active {
+            width: 300px ;
+            opacity: 1;
+        }
+        .search-results {
+            width: 310px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fff;
+            position: absolute;
+            padding: 5px;
+            top: 36px;
+            height: 0;
+            opacity: 0;
+            /* height: 100px; */
+            /* display: none; */
+            -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
+            -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
+            box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25); 
+        }
+        .search-results-active {
+            height: auto;
+            opacity: 1;
         }
     }
-
     .search-icon {
         width: 32px;
         height: 32px;
         display: inline-block;
-        padding: 10px 20px;
+        padding: 10px 10px;
     }
-
+    .chat-icon {
+        padding: 10px 20px 10px 10px;
+    }
     .user-icon {
         width: 48px;
         height: 48px;
         border: 1px solid #fff;
         display: inline-block;
         position: relative;
-        bottom: 17px;
+        bottom: 15px;
+        text-decoration: none;
+        background-color: #28548A;
+        
+        .user-circle {
+            color: #fff;
+            background-color: #3B6FC8;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            .user-initials {
+                font-size: 28px;
+                position: relative;
+                top: 5px;
+            }
+        }
     }
-
     #search-icon-svg {
        pointer-events: none;
        position: relative;
        z-index: 10;
     }
-
-    a {
+    .results-header {
+        display: flex;
+        
+        .results-filter {
+            flex: auto;
+            text-decoration: none;
+            padding: 10px 0; 
+        }
+    }
+    .results-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 5px;
+        .search-result {
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.25);
+            align-self: center;
+            text-align: left;
+            padding: 20px 10px;
+        }
+        .search-category,
+        .search-name {
+            display: block;
+        }
+        .search-category {
+            color: #133862;
+            font-size: 12px;
+            opacity: .6;
+        }
+    }
+    .header-link {
         position: relative;
         display: inline-block;
         z-index: 100;
     }
-
-    a:after {
+    .header-link:after {
        content: ""; 
         position: absolute; 
         top: 0; 
@@ -140,7 +263,5 @@
         width: 100%;
         height: 100%;
     }
-
     .st0{fill:#FFFFFF;}
 </style>
-
