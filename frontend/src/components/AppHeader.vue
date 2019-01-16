@@ -87,7 +87,6 @@
 <script>
     export default { 
         name: "AppHeader",
-        mixins: [ clickaway ],
         methods: {
             toggleSearch(e) {
                 let searchInput = document.getElementById("search-input");
