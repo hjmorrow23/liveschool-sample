@@ -84,6 +84,10 @@
         color: #fff;
         position: relative;
         top: 22px;
+
+        @media only screen and (max-width: 1150px) {
+            display: none;
+        }
     }
     .header-right {
         right: 12px;
@@ -93,6 +97,13 @@
         color: #fff;
         height: 52px;
         display: inline-block;
+        opacity: 1;
+        transition: opcaity .35s;
+
+            &:hover {
+                opacity: .8;
+            }
+
         span {
             font-size: 24px; 
             vertical-align: top;
@@ -152,9 +163,26 @@
         height: 32px;
         display: inline-block;
         padding: 10px 10px;
+
+        opacity: 1;
+        transition: opcaity .35s;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        @media (max-width: 650px) {
+            display: none ;
+        }
     }
     .chat-icon {
         padding: 10px 20px 10px 10px;
+        opacity: 1;
+            transition: opcaity .35s;
+
+            &:hover {
+                opacity: .8;
+            }
     }
     .user-icon {
         width: 48px;
@@ -165,6 +193,12 @@
         bottom: 15px;
         text-decoration: none;
         background-color: #28548A;
+        opacity: 1;
+            transition: opcaity .35s;
+
+            &:hover {
+                opacity: .8;
+            }
         
         .user-circle {
             color: #fff;
@@ -217,9 +251,14 @@
     }
     .header-link {
         position: relative;
-        display: inline-block;
         z-index: 100;
     }
+
+    .chat-icon,
+    .user-icon {
+        display: inline-block;
+    }
+
     .header-link:after {
        content: ""; 
         position: absolute; 

@@ -54,6 +54,8 @@
 
     .content {
         padding: 14px 20px;
+        position: relative;
+        z-index: 100;
     }
 
     .info-bar {
@@ -65,11 +67,24 @@
         &-center,
         &-right {
             display: inline-block;
+
+            @media (max-width: 650px) {
+                display: block;
+            }
         }
 
         &-left,
         &-right {
             position: absolute;
+            @media (max-width: 650px) {
+                position: relative;
+            }
+        }
+
+        &-center {
+            @media (max-width: 650px) {
+                margin: 20px 0 40px;
+            }
         }
 
         &-left {
@@ -117,6 +132,10 @@
             width: 160px;
             position: relative;
             top: 15px;
+
+            @media (max-width: 650px) {
+                padding: 10px;
+            }
         }
 
     }
