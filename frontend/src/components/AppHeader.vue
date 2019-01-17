@@ -68,6 +68,8 @@
         height: 73px;
         background-color: #3B6FC8;
         position: relative;
+        padding: 0 12px;
+        text-align: center;
     }
     .header-left,
     .header-right {
@@ -75,7 +77,7 @@
         top: 12px;
     }
     .header-left {
-        left: 12px;
+        /* left: 12px; */
     }
     .header-middle {
         font-size: 24px;
