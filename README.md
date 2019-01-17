@@ -1,1 +1,0 @@
-# liveschool-sample

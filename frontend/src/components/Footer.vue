@@ -56,7 +56,10 @@
         }
 
         &-center {
-            float: left;
+            @media (max-width: 650px) {
+                float: left;
+            }
+            
         }
 
         &-left,
