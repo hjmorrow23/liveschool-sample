@@ -134,7 +134,7 @@
         }
         .search-input-active {
             width: 300px ;
-            opacity: 1;
+            opacity: 1; 
         }
         .search-results {
             width: 310px;
