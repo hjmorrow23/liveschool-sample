@@ -33,7 +33,7 @@
     import ChatSVG from '@/components/svg/ChatSVG'
     import SearchResults from '@/components/SearchResults'
 
-    export default { 
+    export default {
         name: "AppHeader",
         mixins: [ clickaway ],
         components: {
@@ -57,8 +57,8 @@
                 let searchExpanded = document.getElementById("search-expanded");
                 let searchResults = document.getElementById("search-results");
                 if(searchResults.classList.contains('search-results-active')) {
-                   searchResults.classList.remove("search-results-active"); 
-                }       
+                   searchResults.classList.remove("search-results-active");
+                }
             }
         }
     }
@@ -105,7 +105,7 @@
             }
 
         span {
-            font-size: 24px; 
+            font-size: 24px;
             vertical-align: top;
             position: relative;
             top: 10px;
@@ -130,7 +130,7 @@
             &:focus {
                 outline: none;
             }
-            
+
         }
         .search-input-active {
             width: 300px ;
@@ -150,12 +150,13 @@
             /* display: none; */
             -webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
             -moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
-            box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25); 
+            box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.25);
         }
         .search-results-active {
             height: auto;
             opacity: 1;
             pointer-events: auto;
+            z-index: 1000;
         }
     }
     .search-icon {
@@ -199,7 +200,7 @@
             &:hover {
                 opacity: .8;
             }
-        
+
         .user-circle {
             color: #fff;
             background-color: #3B6FC8;
@@ -221,11 +222,11 @@
     }
     .results-header {
         display: flex;
-        
+
         .results-filter {
             flex: auto;
             text-decoration: none;
-            padding: 10px 0; 
+            padding: 10px 0;
         }
     }
     .results-body {
@@ -260,10 +261,10 @@
     }
 
     .header-link:after {
-       content: ""; 
-        position: absolute; 
-        top: 0; 
-        left: 0; 
+       content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
     }
